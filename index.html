@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>スタッフ給与設計ガイド</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -5,6 +10,7 @@
 <style>
 /* Layout: a book you page through. Cover screen -> single-column paged reader (CSS columns, translateX), running header + bottom bar. */
 :root {
+  color-scheme: light;
   --bg: #f1f4f8;
   --paper: #ffffff;
   --ink: #1d2430;
@@ -65,8 +71,8 @@ button { font: inherit; color: inherit; }
 .reader { height: 100%; display: flex; flex-direction: column; }
 .progress { height: 3px; background: var(--rule); }
 .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s ease; }
-.runhead, .bar-in { width: min(100%, 760px); margin: 0 auto; }
-.runhead { display: flex; justify-content: space-between; gap: 12px; padding: 10px max(20px, env(safe-area-inset-left, 0px)) 0; font-size: .72rem; color: var(--muted); }
+.runhead, .bar-in { box-sizing: border-box; width: min(100%, 760px); margin: 0 auto; }
+.runhead { display: flex; justify-content: space-between; gap: 12px; padding: 10px max(20px, env(safe-area-inset-left, 0px)) 0; font-size: .82rem; color: var(--muted); }
 .runhead span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .runhead span:last-child { flex: none; }
 .stage { flex: 1; min-height: 0; display: flex; justify-content: center; padding: 8px 0; }
@@ -76,11 +82,11 @@ button { font: inherit; color: inherit; }
 .bar { padding: 4px max(12px, env(safe-area-inset-left, 0px)) 8px; }
 .bar-in { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
 .bar-group { display: flex; align-items: center; gap: 4px; }
-.ib { min-width: 44px; min-height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--head); font-weight: 700; font-size: .85rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0 8px; }
+.ib { min-width: 44px; min-height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--head); font-weight: 700; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0 8px; }
 .ib:hover:not(:disabled) { background: var(--tint); }
 .ib:disabled { opacity: .3; cursor: default; }
 .ib svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.pager { font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 56px; text-align: center; }
+.pager { font-size: .95rem; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 56px; text-align: center; }
 @media (max-width: 760px) {
   .reader { background: var(--paper); }
   .sheet { border-radius: 0; box-shadow: none; }
@@ -101,15 +107,15 @@ button { font: inherit; color: inherit; }
 .cols p.note { font-size: .9em; color: var(--muted); }
 .cols .emph { font-weight: 700; color: var(--head); }
 .cols ul, .cols ol { margin: .8em 0; padding-left: 1.5em; }
-.cols li { margin: .55em 0; text-align: left; break-inside: avoid; }
-.cols table { width: 100%; border-collapse: collapse; margin: 1em 0; font-family: var(--sans); font-size: .82em; line-height: 1.55; break-inside: avoid; text-align: left; }
+.cols li { margin: .55em 0; text-align: left; }
+.cols table { width: 100%; border-collapse: collapse; margin: 1em 0; font-family: var(--sans); font-size: .86em; line-height: 1.55; break-inside: avoid; text-align: left; }
 .cols th, .cols td { border: 1px solid var(--rule); padding: .5em .55em; vertical-align: top; }
 .cols th { background: var(--th-bg); color: var(--th-fg); font-weight: 700; }
 .cols td.num, .cols th.num { text-align: right; }
 .cols tr.total td { font-weight: 700; background: var(--tint); }
 .cols figure { margin: 1.1em 0; text-align: center; break-inside: avoid; }
-.cols figure img { display: block; margin: 0 auto; max-width: 100%; width: auto; height: auto; max-height: calc(var(--hc, 600px) * .64); border-radius: 8px; background: #fff; border: 1px solid var(--rule); }
-.cols figcaption { font-family: var(--sans); font-size: .74em; line-height: 1.5; color: var(--muted); margin-top: .5em; text-indent: 0; }
+.cols figure img { display: block; margin: 0 auto; max-width: 100%; width: auto; height: auto; max-height: calc(var(--hc, 600px) * .6); border-radius: 8px; background: #fff; border: 1px solid var(--rule); }
+.cols figcaption { font-family: var(--sans); font-size: .8em; line-height: 1.5; color: var(--muted); margin-top: .5em; text-indent: 0; }
 .cols .summary li { font-weight: 700; }
 
 /* ---------- contents panel ---------- */
@@ -127,6 +133,9 @@ button { font: inherit; color: inherit; }
 @media (min-width: 761px) { .toc { align-items: center; } .toc-panel { border-radius: 18px; } }
 @media (prefers-reduced-motion: reduce) { .progress i { transition: none; } }
 </style>
+</head>
+<body>
+
 
 <main id="home" class="home">
   <div class="home-inner">
@@ -311,8 +320,8 @@ button { font: inherit; color: inherit; }
   var total = chapters.reduce(function (a, c) { return a + c.chars; }, 0);
   var cum = []; chapters.reduce(function (a, c, i) { cum[i] = a; return a + c.chars; }, 0);
 
-  var fs = parseInt(lsGet('sk-fs'), 10) || (window.innerWidth < 600 ? 17 : 18);
-  function setFs(v) { fs = Math.max(14, Math.min(24, v)); document.documentElement.style.setProperty('--fs', fs + 'px'); lsSet('sk-fs', String(fs)); }
+  var fs = parseInt(lsGet('sk-fs3'), 10) || (window.innerWidth < 600 ? 23 : 22);
+  function setFs(v) { fs = Math.max(16, Math.min(32, v)); document.documentElement.style.setProperty('--fs', fs + 'px'); lsSet('sk-fs3', String(fs)); }
   setFs(fs);
 
   var st = { c: 0, p: 0, pages: 1, W: 0, gap: 0 };
@@ -478,3 +487,6 @@ button { font: inherit; color: inherit; }
   if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', function () { clearTimeout(rt); rt = setTimeout(relayout, 60); });
 })();
 </script>
+
+</body>
+</html>
