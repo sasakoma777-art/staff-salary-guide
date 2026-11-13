@@ -109,7 +109,7 @@ button { font: inherit; color: inherit; }
 .cols ul, .cols ol { margin: .8em 0; padding-left: 1.5em; }
 .cols li { margin: .55em 0; text-align: left; }
 .cols table { width: 100%; border-collapse: collapse; margin: 1em 0; font-family: var(--sans); font-size: .86em; line-height: 1.55; break-inside: avoid; text-align: left; }
-.cols th, .cols td { border: 1px solid var(--rule); padding: .5em .55em; vertical-align: top; }
+.cols th, .cols td { border: 1px solid var(--rule); padding: .4em .45em; vertical-align: top; }
 .cols th { background: var(--th-bg); color: var(--th-fg); font-weight: 700; }
 .cols td.num, .cols th.num { text-align: right; }
 .cols tr.total td { font-weight: 700; background: var(--tint); }
@@ -348,6 +348,22 @@ button { font: inherit; color: inherit; }
     b.className = 'badge'; b.setAttribute('aria-hidden', 'true'); b.textContent = String(c + 1);
     h.insertBefore(b, h.firstChild);
   }
+  function fitTables(colW, Hc) {
+    var ts = cols.querySelectorAll('table');
+    if (!ts.length) return;
+    var m = document.createElement('div');
+    m.className = 'cols';
+    m.style.cssText = 'position:absolute;visibility:hidden;left:-9999px;top:0;width:' + colW + 'px';
+    document.body.appendChild(m);
+    Array.prototype.forEach.call(ts, function (t) {
+      var c = t.cloneNode(true), z = 0.86;
+      m.innerHTML = ''; m.appendChild(c);
+      c.style.fontSize = z + 'em';
+      while (c.offsetHeight > Hc * 0.88 && z > 0.5) { z -= 0.03; c.style.fontSize = z + 'em'; }
+      t.style.fontSize = z + 'em';
+    });
+    document.body.removeChild(m);
+  }
   function measure() {
     var W = sheet.clientWidth, Hs = sheet.clientHeight;
     var P = W < 520 ? 22 : 48, PT = 22, PB = 18;
@@ -359,6 +375,7 @@ button { font: inherit; color: inherit; }
     cols.style.columnWidth = colW + 'px';
     cols.style.columnGap = (2 * P) + 'px';
     cols.style.setProperty('--hc', Hc + 'px');
+    fitTables(colW, Hc);
     st.W = W; st.gap = 2 * P;
     st.pages = Math.max(1, Math.round((cols.scrollWidth + st.gap) / W));
   }
